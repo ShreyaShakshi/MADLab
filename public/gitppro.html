@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+<link rel="manifest" href="manifest.json">
+<style>
+    .more {
+        display: flex;
+        margin-left: 300px;
+
+    }
+    body{
+        background-color: black;
+        color: blanchedalmond;
+    }
+</style>
+
+<body>
+
+    <center>
+        <h1>GITHUB PROFILE</h1>
+        <h1> <input type="text" id="text_input">
+            <input type="button" onclick="gitdata()" value="GET PROFILE"> <br>
+        </h1>
+        <h2>
+            <div id='git_image'>
+                <img src="/home/1RD19MCA05_Shreya/Desktop/GitHub Profile/GitHub Profile/public/images/icons/githublogo.png" alt="PROFILE IMAGE" id="image" width="100px" height="110px"><br>
+        </h2>
+    </center>
+    <p id='para'></p>
+    </div>
+    <center>
+        <div class="more" style="border: thick solid white; width: 600px; margin-left: 0px;">
+            <div class="partOne" >
+                <p>
+                    url
+                </p>
+                <p>
+                    html_url
+                </p>
+                <p>
+                    followers_url
+                </p>
+                <p>
+                    following_url
+                </p>
+                <p>
+                    gists_url
+                </p>
+                <p>
+                    starred_url
+                </p>
+                <p>
+                    subscriptions_url
+                </p>
+                <p>
+                    organizations_url
+                </p>
+                <p>
+                    repos_url
+                </p>
+                <p>
+                    events_url
+                </p>
+                <p>
+                    received_events_url
+                </p>
+                <p>
+                    type
+                </p>
+                <p>
+                    site_admin
+                </p>
+            </div>
+            <div class="partTwo">
+                <p id="url">
+
+                </p>
+                <p id="html_url">
+
+                </p>
+                <p id="followers_url">
+
+                </p>
+                <p id="following_url">
+
+                </p>
+                <p id="gists_url">
+
+                </p>
+                <p id="starred_url">
+
+                </p>
+                <p id="subscriptions_url">
+
+                </p>
+                <p id="organizations_url">
+
+                </p>
+                <p id="repos_url">
+
+                </p>
+                <p id="events_url">
+
+                </p>
+                <p id="received_events_url">
+
+                </p>
+                <p id="type">
+
+                </p>
+                <p id="site_admin">
+
+                </p>
+            </div>
+        </div>
+    </center>
+</body>
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('sw.js')
+                .then(registration => {
+                    console.log('service worker is registered', registration);
+                })
+                .catch(err => {
+                    console.log('Registration failed', err);
+                })
+        })
+    }
+
+    function gitdata() {
+
+        var url = 'https://api.github.com/users/' + document.getElementById('text_input').value;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.avatar_url)
+                var im = document.getElementById("image");
+                im.setAttribute("src", data.avatar_url);
+                //var gi= document.getElementById('para');
+                //gi.innerHTML=JSON.stringify(data);
+                document.getElementById('url').innerHTML = data.url;
+                document.getElementById('html_url').innerHTML = data.html_url;
+                document.getElementById('followers_url').innerHTML = data.followers_url;
+                document.getElementById('following_url').innerHTML = data.following_url;
+                document.getElementById('gists_url').innerHTML = data.gists_url;
+                document.getElementById('starred_url').innerHTML = data.starred_url;
+                document.getElementById('subscriptions_url').innerHTML = data.subscriptions_url;
+                document.getElementById('organizations_url').innerHTML = data.organizations_url;
+                document.getElementById('repos_url').innerHTML = data.repos_url;
+                document.getElementById('events_url').innerHTML = data.events_url;
+                document.getElementById('received_events_url').innerHTML = data.received_events_url;
+                document.getElementById('type').innerHTML = data.type;
+                document.getElementById('site_admin').innerHTML = data.site_admin;
+            })
+
+            .catch(function (response) {
+                return response.status;
+                console.log(response.status);
+            });;
+
+
+
+    }
+</script>
+
+</html>
